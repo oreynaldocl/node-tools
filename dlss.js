@@ -61,6 +61,7 @@ async function main(currentFolder, toAnalyze) {
   await WriteToFile(currentFolder, dlls);
 }
 
+// ~  node .\dlss.js root
 const folder = process.argv[2];
-const currentFolder = `D:\\bin\\tools\\renamer`;
+const currentFolder = __dirname;
 main(currentFolder, folder );
