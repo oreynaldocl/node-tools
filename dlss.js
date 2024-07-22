@@ -57,11 +57,13 @@ async function main(currentFolder, toAnalyze) {
   const startMs = new Date().getMilliseconds();
   const analyze = path.join(currentFolder, toAnalyze);
   let csProjs = await ListAllCSProj(analyze);
-  console.log(csProjs);
+  for (let index = 0; index < csProjs.length; index++) {
+    console.log(`${index} - ${csProjs[index]}`);
+  }
   let dlls = await GetDlls(csProjs);
   await WriteToFile(currentFolder, dlls);
-  const endMs = new Date().getMilliseconds();
-  console.log(`It takes: ${(endMs - startMs)} ms`);
+  const taken = new Date().getMilliseconds() - startMs;
+  console.log(`It takes: ${taken} ms`);
 }
 
 // ~  node .\dlss.js root
