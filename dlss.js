@@ -28,13 +28,14 @@ async function GetDlls(csProjs) {
     const data = await fsp.readFile(proj, 'utf8');
     const splitted = data.split('\n');
     for (let line of splitted) {
-      const startAt = line.indexOf('..\\');
+      const startAt = line.indexOf('\.\.\\');
       const endAt = line.indexOf('.dll');
-      if (startAt === -1 || endAt === -1) {
+      const contains3rd = line.indexOf('\\3rd');
+      if (startAt === -1 || endAt === -1 || contains3rd === -1) {
         continue;
       }
       line = line.substring(startAt, endAt + 4);
-      line = line.replace(/..\\/g, '');
+      line = line.replace(/\.\.\\/g, '').replace(/\.\.\//g, '');
       if (line.length > 0 && !myMap[line]) {
         myMap.set(line, true);
       }
